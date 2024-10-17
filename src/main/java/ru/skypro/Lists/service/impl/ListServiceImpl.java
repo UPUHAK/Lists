@@ -7,20 +7,24 @@ import ru.skypro.Lists.exception.EmployeeNotFoundException;
 import ru.skypro.Lists.exception.EmployeeStorageIsFullException;
 import ru.skypro.Lists.service.ListService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ListServiceImpl implements ListService {
 
     public static final int MAX_EMPLOYEES = 100;
 
-    private final List<Employee> employees = new ArrayList<>(List.of(
+    Map<String, Employee> employees = new HashMap<>(Map.of(
+            "IvanIvanov",
             new Employee("Ivan", "Ivanov"),
+            "PetrPetrov",
             new Employee("Petr", "Petrov"),
+            "SidorSidorov",
             new Employee("Sidor", "Sidorov")));
+
+    public String key(Employee employee) {
+        return employee.getFirstName() + employee.getLastName();
+    }
 
     @Override
     public Employee addEmployee(String firstName, String lastName) {
@@ -28,27 +32,27 @@ public class ListServiceImpl implements ListService {
             throw new EmployeeStorageIsFullException();
         }
         Employee employee = new Employee(firstName, lastName);
-        if (employees.contains(employee)) {
+        if (employees.containsKey(key(employee))) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.add(employee);
+        employees.put(key(employee), employee);
         return employee;
     }
 
     @Override
     public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
+        if (!employees.containsKey(key(employee))) {
             throw new EmployeeNotFoundException();
         }
-        employees.remove(employee);
+        employees.remove(key(employee));
         return employee;
     }
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
+        if (!employees.containsKey(key(employee))) {
             throw new EmployeeNotFoundException();
         }
         return employee;
@@ -56,7 +60,7 @@ public class ListServiceImpl implements ListService {
 
     @Override
     public Collection<Employee> list() {
-        return Collections.unmodifiableList(employees);
+        return Collections.unmodifiableMap(employees).values();
     }
 
 
