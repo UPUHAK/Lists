@@ -16,22 +16,22 @@ public class ListServiceImpl implements ListService {
 
     Map<String, Employee> employees = new HashMap<>(Map.of(
             "IvanIvanov",
-            new Employee("Ivan", "Ivanov"),
+            new Employee("Ivan", "Ivanov", 70000, 4),
             "PetrPetrov",
-            new Employee("Petr", "Petrov"),
+            new Employee("Petr", "Petrov", 60000, 3),
             "SidorSidorov",
-            new Employee("Sidor", "Sidorov")));
+            new Employee("Sidor", "Sidorov", 85000, 3)));
 
     public String key(Employee employee) {
         return employee.getFirstName() + employee.getLastName();
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName, int salary, int department) {
         if (employees.size() >= MAX_EMPLOYEES) {
             throw new EmployeeStorageIsFullException();
         }
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employees.containsKey(key(employee))) {
             throw new EmployeeAlreadyAddedException();
         }
@@ -40,8 +40,8 @@ public class ListServiceImpl implements ListService {
     }
 
     @Override
-    public Employee removeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee removeEmployee(String firstName, String lastName, int salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (!employees.containsKey(key(employee))) {
             throw new EmployeeNotFoundException();
         }
@@ -50,8 +50,8 @@ public class ListServiceImpl implements ListService {
     }
 
     @Override
-    public Employee findEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee findEmployee(String firstName, String lastName, int salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (!employees.containsKey(key(employee))) {
             throw new EmployeeNotFoundException();
         }

@@ -25,24 +25,24 @@ public class ListsController {
         return "Отдел кадров";
     }
 
-    @GetMapping("list")
+    @GetMapping("getAll")
     public Collection<Employee> list() {
         return listService.list();
     }
 
     @GetMapping("add")
-    public Employee add(@RequestParam String firstName, @RequestParam String lastName) {
-        return listService.addEmployee(firstName, lastName);
+    public Employee add(@RequestParam String firstName, @RequestParam String lastName, int salary, int department) {
+        return listService.addEmployee(firstName, lastName, salary, department);
     }
 
     @GetMapping("remove")
-    public Employee remove(@RequestParam String firstName, @RequestParam String lastName) {
-        return listService.removeEmployee(firstName, lastName);
+    public Employee remove(@RequestParam String firstName, @RequestParam String lastName, int salary, int department) {
+        return listService.removeEmployee(firstName, lastName, salary, department);
     }
 
     @GetMapping("find")
-    public Employee find(@RequestParam String firstName, @RequestParam String lastName) {
-        return listService.findEmployee(firstName, lastName);
+    public Employee find(@RequestParam String firstName, @RequestParam String lastName, int salary, int department) {
+        return listService.findEmployee(firstName, lastName, salary, department);
     }
 
 
