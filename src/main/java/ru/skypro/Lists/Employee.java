@@ -1,5 +1,7 @@
 package ru.skypro.Lists;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
@@ -10,8 +12,8 @@ public class Employee {
     private final int department;
 
     public Employee(String firstName, String lastName, int salary, int department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName);
+        this.lastName = StringUtils.capitalize(lastName);
         this.salary = salary;
         this.department = department;
     }

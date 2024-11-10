@@ -1,5 +1,8 @@
 package ru.skypro.Lists.controller;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +34,17 @@ public class ListsController {
     }
 
     @GetMapping("add")
-    public Employee add(@RequestParam String firstName, @RequestParam String lastName, int salary, int department) {
-        return listService.addEmployee(firstName, lastName, salary, department);
+    public ResponseEntity<Employee> add(@RequestParam String firstName,
+                        @RequestParam String lastName,
+                        @RequestParam int salary,
+                        @RequestParam int department
+    ) {
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+
+        return ResponseEntity.ok(listService.addEmployee(firstName, lastName, salary, department));
     }
 
     @GetMapping("remove")
