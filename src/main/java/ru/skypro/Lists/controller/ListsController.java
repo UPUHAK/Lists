@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.skypro.Lists.Employee;
-import ru.skypro.Lists.exception.EmployeeAlreadyAddedException;
+import ru.skypro.Lists.exception.WrongArgumentException;
 import ru.skypro.Lists.service.ListService;
 
 import java.util.Collection;
@@ -40,7 +40,7 @@ public class ListsController {
                         @RequestParam int department
     ) {
         if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
-            throw new EmployeeAlreadyAddedException();
+            throw new WrongArgumentException();
         }
 
 
