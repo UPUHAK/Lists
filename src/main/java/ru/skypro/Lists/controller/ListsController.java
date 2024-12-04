@@ -35,9 +35,9 @@ public class ListsController {
 
     @GetMapping("add")
     public ResponseEntity<Employee> add(@RequestParam String firstName,
-                        @RequestParam String lastName,
-                        @RequestParam int salary,
-                        @RequestParam int department
+                                        @RequestParam String lastName,
+                                        @RequestParam int salary,
+                                        @RequestParam int department
     ) {
         if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
             throw new WrongArgumentException();
