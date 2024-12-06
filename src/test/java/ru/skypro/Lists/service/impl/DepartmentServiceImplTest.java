@@ -29,81 +29,61 @@ public class DepartmentServiceImplTest {
 
     @Test
     void shouldCorrectlyCalculateSalarySum() {
-        //given
         int departmentID = 2;
         int expectedSum = 60;
-
         Mockito.when(listService.list()).thenReturn(employees.values());
 
-        //when
         int actualSum = departmentService.getSalarySum(departmentID);
 
-        //then
         Assertions.assertEquals(expectedSum, actualSum);
 
     }
 
     @Test
     void shouldCorrectlyFindEmployeeWithMaxSalary() {
-        //given
         int departmentID = 2;
         Employee expectedEmployee = employees.get("Ivan3Ivanov");
-
         Mockito.when(listService.list()).thenReturn(employees.values());
 
-        //when
         Employee actualEmployee = departmentService.getEmployeeWithMaxSalary(departmentID);
 
-        //then
         Assertions.assertEquals(expectedEmployee, actualEmployee);
 
     }
 
     @Test
     void shouldCorrectlyFindEmployeeWithMinSalary() {
-        //given
         int departmentID = 2;
         Employee expectedEmployee = employees.get("Ivan1Ivanov");
-
         Mockito.when(listService.list()).thenReturn(employees.values());
 
-        //when
         Employee actualEmployee = departmentService.getEmployeeWithMinSalary(departmentID);
 
-        //then
         Assertions.assertEquals(expectedEmployee, actualEmployee);
 
     }
 
     @Test
     void shouldCorrectlyFindEmployeesByDepartmentID() {
-        //given
         int departmentID = 2;
         Collection<Employee> expectedEmployees = new ArrayList<>(employees.values());
-
         Mockito.when(listService.list()).thenReturn(employees.values());
 
-        //when
         Collection<Employee> actualEmployees = departmentService.getAllEmployeesByDepartmentID(departmentID);
 
-        //then
         Assertions.assertEquals(expectedEmployees, actualEmployees);
 
     }
 
     @Test
     void shouldCorrectlyGroupedEmployeesByDepartmentID() {
-        //given
         Map<Integer, List<Employee>> expectedEmployees = new HashMap<>() {{
             put(2, new ArrayList<>(employees.values()));
         }};
-
         Mockito.when(listService.list()).thenReturn(employees.values());
 
-        //when
         Map<Integer, List<Employee>> actualEmployees = departmentService.getAllEmployeesGroupedByDepartmentID();
 
-        //then
         Assertions.assertEquals(expectedEmployees, actualEmployees);
 
     }

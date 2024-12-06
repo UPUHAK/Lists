@@ -14,15 +14,7 @@ public class ListServiceImpl implements ListService {
 
     public static final int MAX_EMPLOYEES = 100;
 
-    Map<String, Employee> employees = new HashMap<>(
-//            Map.of(
-//            "IvanIvanov",
-//            new Employee("Ivan", "Ivanov", 70000, 4),
-//            "PetrPetrov",
-//            new Employee("Petr", "Petrov", 60000, 3),
-//            "SidorSidorov",
-//            new Employee("Sidor", "Sidorov", 85000, 3))
-    );
+    Map<String, Employee> employees = new HashMap<>();
 
     public String key(Employee employee) {
         return employee.getFirstName() + employee.getLastName();
